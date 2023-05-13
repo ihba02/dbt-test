@@ -1,5 +1,12 @@
-{{ config(materialized='table',schema='analytics') }}
+{{ config(materialized="table", schema="analytics") }}
 
-Select A.ProductID,A.ProductName,A.Category,SUM(B.Units) AS Units, SUM(B.sale_price) AS SalePrice,B.currency FROM {{ref('DIM_PRODUCT')}} AS A
-LEFT JOIN dbt_ihba02_raw_data.order_details AS B ON A.ProductID==B.product_id
-GROUP BY A.ProductID,A.ProductName,A.Category,B.currency
+select
+    a.productid,
+    a.productname,
+    a.category,
+    sum(b.units) as units,
+    sum(b.sale_price)  as saleprice,
+    b.currency
+from {{ ref("DIM_PRODUCT") }} as a
+left join dbt_ihba02_raw_data.order_details as b on a.productid == b.product_id
+group by a.productid, a.productname, a.category, b.currency
