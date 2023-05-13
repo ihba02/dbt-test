@@ -21,3 +21,18 @@ models:
                 - not_null
 
 
+exposures:
+
+  - name: Product_sales
+    type: dashboard
+    maturity: high
+    url: https://bi.tool/dashboards/1
+    description: >
+      Sales on products
+
+    depends_on:
+      - ref('DIM_PRODUCT')
+
+    owner:
+      name: ihba02
+      email: ihba02@gmail.com
