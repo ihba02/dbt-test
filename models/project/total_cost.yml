@@ -1,0 +1,18 @@
+version: 2
+metrics:
+  - name: total_cost
+    label: Total Cost
+    model: ref('PRODUCT_SALES')
+    description: "Total Cost"
+
+    calculation_method: sum
+    expression: saleprice
+
+    dimensions:
+      - ProductName
+      - currency
+
+    filters:
+      - field: productid
+        operator: '='
+        value: '1'
